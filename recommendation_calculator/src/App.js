@@ -82,7 +82,7 @@ function QuestionCard({ questionData, selected, onSelect }) {
             />
             <label className="form-check-label text-white" htmlFor={opt.id}>
               <span style={{ marginRight: "6px" }}>{opt.emoji}</span>
-              {opt.text}{" "}
+              {opt.text} {" "}
               {opt.link && (
                 <a
                   href={opt.link.url}
@@ -112,6 +112,14 @@ function ResultCard({ result, onRestart }) {
       </h2>
       <h3 className="my-3">{result.style}</h3>
       <p className="lead">{result.description}</p>
+      {result.image && (
+        <img
+          src={result.image}
+          alt={result.style}
+          className="img-fluid rounded mt-4 shadow"
+          style={{ maxHeight: "250px", objectFit: "cover" }}
+        />
+      )}
       <button className="btn btn-outline-light mt-4" onClick={onRestart}>
         Пройти ще раз
       </button>
@@ -130,8 +138,8 @@ function getRecommendation(answers) {
     return {
       style: "Джаз / Lo-fi",
       emoji: "🎷",
-      description:
-        "Ти любиш спокійні та атмосферні мелодії — джаз та lo-fi створять ідеальний настрій.",
+      description: "Ти любиш спокійні та атмосферні мелодії — джаз та lo-fi створять ідеальний настрій.",
+      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"
     };
   }
 
@@ -139,8 +147,8 @@ function getRecommendation(answers) {
     return {
       style: "EDM / Techno",
       emoji: "🎧",
-      description:
-        "Ти енергійний і любиш драйв — електронна музика зарядить тебе на повну.",
+      description: "Ти енергійний і любиш драйв — електронна музика зарядить тебе на повну.",
+      image: "https://images.unsplash.com/photo-1581090700227-1f9c66024c92"
     };
   }
 
@@ -148,8 +156,8 @@ function getRecommendation(answers) {
     return {
       style: "Альтернативний рок / Indie",
       emoji: "🎸",
-      description:
-        "Ти глибокий і емоційний, рок-музика підкреслить твою індивідуальність.",
+      description: "Ти глибокий і емоційний, рок-музика підкреслить твою індивідуальність.",
+      image: "https://images.unsplash.com/photo-1511376777868-611b54f68947"
     };
   }
 
@@ -157,8 +165,8 @@ function getRecommendation(answers) {
     return {
       style: "Поп / K-pop",
       emoji: "🎤",
-      description:
-        "Ти життєрадісний і відкритий до нового — поп та K-pop піднімуть настрій.",
+      description: "Ти життєрадісний і відкритий до нового — поп та K-pop піднімуть настрій.",
+      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80"
     };
   }
 
@@ -166,8 +174,8 @@ function getRecommendation(answers) {
     return {
       style: "Класична музика",
       emoji: "🎻",
-      description:
-        "Ти цінуєш витонченість і спокій — класика для тебе ідеальна.",
+      description: "Ти цінуєш витонченість і спокій — класика для тебе ідеальна.",
+      image: "https://images.unsplash.com/photo-1585404931202-1236c7f9e4f4"
     };
   }
 
@@ -176,6 +184,7 @@ function getRecommendation(answers) {
       style: "Рок та Метал",
       emoji: "🤘",
       description: "Ти любиш потужні ритми та емоції — рок і метал саме для тебе.",
+      image: "https://images.unsplash.com/photo-1515202913167-d9a698095ebf"
     };
   }
 
@@ -183,6 +192,7 @@ function getRecommendation(answers) {
     style: "Змішаний стиль",
     emoji: "🎼",
     description: "У тебе різноманітний музичний смак, який поєднує кілька жанрів.",
+    image: "https://images.unsplash.com/photo-1544785349-c4a5301826fd"
   };
 }
 
@@ -255,11 +265,7 @@ export default function App() {
   }
 
   const currentQuestion = questions[step];
-
-  // Обчислюємо прогрес у %
-  const progressPercent = questions.length
-    ? Math.round(((step + 1) / questions.length) * 100)
-    : 0;
+  const progressPercent = questions.length ? Math.round(((step + 1) / questions.length) * 100) : 0;
 
   return (
     <div
@@ -272,7 +278,6 @@ export default function App() {
       </header>
 
       <div className="w-100" style={{ maxWidth: 600 }}>
-        {/* Прогрес-бар */}
         <div className="progress mb-4" style={{ height: "20px" }}>
           <div
             className="progress-bar bg-info"
